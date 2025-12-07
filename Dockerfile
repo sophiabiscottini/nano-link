@@ -1,6 +1,6 @@
 # =================================
 # NanoLink Dockerfile
-# Multi-stage build for production
+# Multi-stage build for monorepo
 # =================================
 
 # Stage 1: Dependencies
@@ -35,21 +35,23 @@ COPY . .
 # Generate Prisma client
 RUN npx prisma generate
 
-# Build the application
+# Build both applications
 RUN npm run build
 
-# Stage 3: Production Runner
-FROM node:20-alpine AS runner
+# =================================
+# API Production Runner
+# =================================
+FROM node:20-alpine AS api
 WORKDIR /app
 
 ENV NODE_ENV=production
 
 # Create non-root user for security
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nanolink
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nanolink
 
 # Copy necessary files
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/apps/api/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
@@ -64,5 +66,29 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health/live || exit 1
 
-# Start the application
-CMD ["node", "dist/main.js"]
+# Start the API
+CMD ["node", "dist/apps/api/src/main.js"]
+
+# =================================
+# Worker Production Runner
+# =================================
+FROM node:20-alpine AS worker
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Create non-root user for security
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nanolink
+
+# Copy necessary files
+COPY --from=builder /app/apps/worker/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/prisma ./prisma
+
+# Switch to non-root user
+USER nanolink
+
+# Start the Worker
+CMD ["node", "dist/apps/worker/src/main.js"]

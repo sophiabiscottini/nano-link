@@ -11,6 +11,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: api
     container_name: nanolink-api
     restart: unless-stopped
     ports:
@@ -43,9 +44,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: worker
     container_name: nanolink-worker
     restart: unless-stopped
-    command: ["node", "dist/worker.js"]
     environment:
       - NODE_ENV=${NODE_ENV:-production}
       - DATABASE_URL=postgresql://${POSTGRES_USER:-nanolink}:${POSTGRES_PASSWORD:-nanolink}@postgres:5432/${POSTGRES_DB:-nanolink}?schema=public

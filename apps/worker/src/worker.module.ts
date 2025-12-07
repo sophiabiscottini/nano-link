@@ -1,19 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { BullModule } from '@nestjs/bullmq';
-import { PrismaModule } from '@modules/prisma/prisma.module';
+import { PrismaModule } from '@shared/prisma/prisma.module';
 import { AnalyticsProcessor } from './analytics.processor';
-import { ANALYTICS_QUEUE } from '@common/constants/queues.constant';
-import appConfig from '@config/app.config';
-import redisConfig from '@config/redis.config';
-import databaseConfig from '@config/database.config';
+import { ANALYTICS_QUEUE } from '@shared/common/constants/queues.constant';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, redisConfig, databaseConfig],
-      envFilePath: ['.env', '.env.local'],
+      envFilePath: ['../../.env', '../../.env.local', '.env'],
     }),
     BullModule.forRoot({
       connection: {

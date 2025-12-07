@@ -211,7 +211,7 @@ pnpm test:e2e
 pnpm test:cov
 ```
 
-## 📝 Contributing ~ Join us! ૮˘ ∩ ˘૮♡₊˚
+## 📝 Contributing ~ Join us! ◝(ᵔᗜᵔ)◜
 
 1. Fork the repository 🍴
 2. Create your feature branch (`git checkout -b feature/amazing-feature`) 🌿
@@ -230,6 +230,13 @@ We use [Conventional Commits](https://www.conventionalcommits.org/) ~
 - `refactor:` - Code refactoring ⚙️
 - `test:` - Adding or updating tests 🧪
 - `chore:` - Maintenance tasks 🧹
+
+### Semantic Versioning ₊˚✧
+
+This project follows [Semantic Versioning](https://semver.org/) ~
+- MAJOR version when you make incompatible API changes. ♡
+- MINOR version when you add functionality in a backwards-compatible manner. ✧
+- PATCH version when you make backwards-compatible bug fixes. ₊˚
 
 ## 📄 License ˖˃ˀა
 

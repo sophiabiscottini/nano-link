@@ -14,7 +14,7 @@ import databaseConfig from '@config/database.config';
     ConfigModule.forRoot({
       isGlobal: true,
       load: [appConfig, redisConfig, databaseConfig],
-      envFilePath: ['.env', '.env.local'],
+      envFilePath: ['../../.env', '../../.env.local'],
     }),
 
     BullModule.forRootAsync({

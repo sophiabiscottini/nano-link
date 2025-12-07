@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '@modules/prisma/prisma.service';
 import { RedisService } from '@modules/redis/redis.service';
 import { CreateUrlDto, UrlResponseDto } from './dto';
-import { encodeBase62, padBase62 } from '@common/utils/base62.util';
+import { encodeBase62, padBase62 } from '@shared/common/utils/base62.util';
 
 @Injectable()
 export class UrlService {

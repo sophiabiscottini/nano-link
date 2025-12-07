@@ -6,5 +6,6 @@
     "deleteOutDir": true,
     "webpack": false,
     "tsConfigPath": "tsconfig.build.json"
-  }
+  },
+  "entryFile": "apps/api/src/main"
 }

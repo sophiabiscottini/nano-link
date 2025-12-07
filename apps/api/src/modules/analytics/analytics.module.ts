@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bullmq';
 import { AnalyticsService } from './analytics.service';
 import { AnalyticsController } from './analytics.controller';
-import { ANALYTICS_QUEUE } from '@common/constants/queues.constant';
+import { ANALYTICS_QUEUE } from '@shared/common/constants/queues.constant';
 
 @Module({
   imports: [

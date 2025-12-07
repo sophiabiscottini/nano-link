@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { PrismaService } from '@modules/prisma/prisma.service';
-import { ANALYTICS_QUEUE } from '@common/constants/queues.constant';
+import { ANALYTICS_QUEUE } from '@shared/common/constants/queues.constant';
 
 export interface TrackClickData {
   shortCode: string;

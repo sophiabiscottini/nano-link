@@ -1,8 +1,8 @@
 import { Processor, WorkerHost, OnWorkerEvent } from '@nestjs/bullmq';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bullmq';
-import { PrismaService } from '@modules/prisma/prisma.service';
-import { ANALYTICS_QUEUE } from '@common/constants/queues.constant';
+import { PrismaService } from '@shared/prisma/prisma.service';
+import { ANALYTICS_QUEUE } from '@shared/common/constants/queues.constant';
 import { AnalyticsJobData } from './interfaces/analytics-job.interface';
 import { createHash } from 'crypto';
 
