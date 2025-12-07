@@ -5,6 +5,7 @@ import { PrismaService } from '@shared/prisma/prisma.service';
 import { ANALYTICS_QUEUE } from '@shared/common/constants/queues.constant';
 import { AnalyticsJobData } from './interfaces/analytics-job.interface';
 import { createHash } from 'crypto';
+import * as geoip from 'geoip-lite';
 
 @Processor(ANALYTICS_QUEUE)
 export class AnalyticsProcessor extends WorkerHost {
@@ -34,6 +35,9 @@ export class AnalyticsProcessor extends WorkerHost {
       // Hash IP address for privacy (LGPD/GDPR compliance)
       const hashedIp = ip ? this.hashIpAddress(ip) : null;
 
+      // Resolve country code from IP using GeoIP
+      const countryCode = ip ? this.resolveCountryCode(ip) : null;
+
       // Insert analytics record
       await this.prisma.analytics.create({
         data: {
@@ -42,11 +46,13 @@ export class AnalyticsProcessor extends WorkerHost {
           ipAddress: hashedIp,
           userAgent: userAgent || null,
           referer: referer || null,
-          countryCode: null, // TODO: Implement GeoIP lookup
+          countryCode,
         },
       });
 
-      this.logger.debug(`✨ Analytics recorded for: ${shortCode}`);
+      this.logger.debug(
+        `✨ Analytics recorded for: ${shortCode}${countryCode ? ` (${countryCode})` : ''}`,
+      );
     } catch (error) {
       this.logger.error(`Failed to process analytics for ${shortCode}:`, error);
       throw error;
@@ -60,6 +66,24 @@ export class AnalyticsProcessor extends WorkerHost {
   private hashIpAddress(ip: string): string {
     const salt = process.env.IP_HASH_SALT || 'nanolink-default-salt';
     return createHash('sha256').update(`${ip}${salt}`).digest('hex').substring(0, 64);
+  }
+
+  /**
+   * Resolve country code from IP address using GeoIP
+   * Returns ISO 3166-1 alpha-2 country code (e.g., 'BR', 'US')
+   * https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+   */
+  private resolveCountryCode(ip: string): string | null {
+    try {
+      const geo = geoip.lookup(ip);
+      if (geo && geo.country) {
+        return geo.country;
+      }
+      return null;
+    } catch (error) {
+      this.logger.warn(`Failed to resolve GeoIP for IP: ${ip}`, error);
+      return null;
+    }
   }
 
   @OnWorkerEvent('completed')
