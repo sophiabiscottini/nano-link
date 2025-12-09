@@ -1,6 +1,6 @@
 {
   "name": "nano-link",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A high-performance URL shortening service focused on scalability and data analytics ✨",
   "author": "Sophia (Biscottini)",
   "license": "MIT",
@@ -42,11 +42,14 @@
     "db:reset": "prisma migrate reset --force"
   },
   "dependencies": {
+    "@fastify/swagger": "^9.6.1",
+    "@fastify/swagger-ui": "^5.2.3",
     "@nestjs/bullmq": "^10.2.0",
     "@nestjs/common": "^10.4.0",
     "@nestjs/config": "^3.2.0",
     "@nestjs/core": "^10.4.0",
     "@nestjs/platform-fastify": "^10.4.0",
+    "@nestjs/swagger": "^7.4.2",
     "@nestjs/throttler": "^6.5.0",
     "@prisma/client": "^5.22.0",
     "bullmq": "^5.25.0",
