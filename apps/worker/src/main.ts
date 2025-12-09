@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const app = await NestFactory.createApplicationContext(WorkerModule);
 
-  logger.log('🔧 NanoLink Worker is running ~');
+  logger.log('🔧 ZipLink Worker is running ~');
   logger.log('📊 Processing analytics queue...');
 
   // Keep the process running

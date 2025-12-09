@@ -1,5 +1,5 @@
 # =================================
-# NanoLink Dockerfile
+# ZipLink Dockerfile
 # Multi-stage build for monorepo
 # =================================
 
@@ -48,7 +48,7 @@ ENV NODE_ENV=production
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nanolink
+    adduser --system --uid 1001 ziplink
 
 # Copy necessary files
 COPY --from=builder /app/apps/api/dist ./dist
@@ -57,7 +57,7 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
 
 # Switch to non-root user
-USER nanolink
+USER ziplink
 
 # Expose the port
 EXPOSE 3000
@@ -79,7 +79,7 @@ ENV NODE_ENV=production
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nanolink
+    adduser --system --uid 1001 ziplink
 
 # Copy necessary files
 COPY --from=builder /app/apps/worker/dist ./dist
@@ -88,7 +88,7 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
 
 # Switch to non-root user
-USER nanolink
+USER ziplink
 
 # Start the Worker
 CMD ["node", "dist/apps/worker/src/main.js"]

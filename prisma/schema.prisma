@@ -1,4 +1,4 @@
-// Prisma Schema for NanoLink
+// Prisma Schema for ZipLink
 // Documentation: https://pris.ly/d/prisma-schema
 
 generator client {

@@ -1,6 +1,6 @@
-# NanoLink ✨🔗
+# ZipLink ✨🔗
 
-> *A cute but powerful URL shortening service ~ focused on scalability and data analytics!* ♡
+> *A modern powerful URL shortening service ~ focused on scalability and data analytics!* ♡
 
 [![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=nestjs&logoColor=white)](https://nestjs.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -10,7 +10,7 @@
 
 ## 📋 Overview ꒰ᐢ. .ᐢ꒱
 
-NanoLink is designed to handle high traffic (solving the *Thundering Herd* problem), ensure data consistency in concurrent environments, and process access metrics asynchronously to minimize end-user latency~ ✧
+ZipLink is designed to handle high traffic (solving the *Thundering Herd* problem), ensure data consistency in concurrent environments, and process access metrics asynchronously to minimize end-user latency~ ✧
 
 ### Key Goals ⋆˙⟡
 
@@ -72,8 +72,12 @@ NanoLink is designed to handle high traffic (solving the *Thundering Herd* probl
 
 ### Frontend (Dashboard) ~ Coming Soon! ૮₍˶ᵔ ᵕ ᵔ˶₎ა
 - **Framework:** Next.js 16 (App Router) ✧
-- **Styling:** Tailwind CSS ~
-- **State Management:** TanStack Query ♪
+- **Styling:** Tailwind CSS 4 ~
+- **Animations:** Framer Motion ₊˚
+- **Charts:** Recharts ♪
+- **Icons:** Lucide React ✿
+
+> The dashboard will have private source code.
 
 ## 📁 Project Structure ♡₊˚ 🦢・
 

@@ -1,5 +1,5 @@
 # =================================
-# NanoLink Docker Compose
+# ZipLink Docker Compose
 # Development & Production Setup
 # =================================
 
@@ -12,14 +12,14 @@ services:
       context: .
       dockerfile: Dockerfile
       target: api
-    container_name: nanolink-api
+    container_name: ziplink-api
     restart: unless-stopped
     ports:
       - "${PORT:-3000}:3000"
     environment:
       - NODE_ENV=${NODE_ENV:-production}
       - PORT=3000
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-nanolink}:${POSTGRES_PASSWORD:-nanolink}@postgres:5432/${POSTGRES_DB:-nanolink}?schema=public
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ziplink}:${POSTGRES_PASSWORD:-ziplink}@postgres:5432/${POSTGRES_DB:-ziplink}?schema=public
       - REDIS_URL=redis://redis:6379
       - BASE_URL=${BASE_URL:-http://localhost:3000}
       - CACHE_TTL=${CACHE_TTL:-86400}
@@ -29,7 +29,7 @@ services:
       redis:
         condition: service_healthy
     networks:
-      - nanolink-network
+      - ziplink-network
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health/live"]
       interval: 30s
@@ -45,11 +45,11 @@ services:
       context: .
       dockerfile: Dockerfile
       target: worker
-    container_name: nanolink-worker
+    container_name: ziplink-worker
     restart: unless-stopped
     environment:
       - NODE_ENV=${NODE_ENV:-production}
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-nanolink}:${POSTGRES_PASSWORD:-nanolink}@postgres:5432/${POSTGRES_DB:-nanolink}?schema=public
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-ziplink}:${POSTGRES_PASSWORD:-ziplink}@postgres:5432/${POSTGRES_DB:-ziplink}?schema=public
       - REDIS_URL=redis://redis:6379
       - ANALYTICS_BATCH_SIZE=${ANALYTICS_BATCH_SIZE:-100}
       - ANALYTICS_BATCH_INTERVAL=${ANALYTICS_BATCH_INTERVAL:-5000}
@@ -59,27 +59,27 @@ services:
       redis:
         condition: service_healthy
     networks:
-      - nanolink-network
+      - ziplink-network
 
   # -------------------------
   # PostgreSQL Database
   # -------------------------
   postgres:
     image: postgres:16-alpine
-    container_name: nanolink-postgres
+    container_name: ziplink-postgres
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=${POSTGRES_USER:-nanolink}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-nanolink}
-      - POSTGRES_DB=${POSTGRES_DB:-nanolink}
+      - POSTGRES_USER=${POSTGRES_USER:-ziplink}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ziplink}
+      - POSTGRES_DB=${POSTGRES_DB:-ziplink}
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - nanolink-network
+      - ziplink-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nanolink} -d ${POSTGRES_DB:-nanolink}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ziplink} -d ${POSTGRES_DB:-ziplink}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -90,7 +90,7 @@ services:
   # -------------------------
   redis:
     image: redis:7-alpine
-    container_name: nanolink-redis
+    container_name: ziplink-redis
     restart: unless-stopped
     ports:
       - "${REDIS_PORT:-6379}:6379"
@@ -98,7 +98,7 @@ services:
       - redis_data:/data
     command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
     networks:
-      - nanolink-network
+      - ziplink-network
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -110,7 +110,7 @@ services:
 # Networks
 # -------------------------
 networks:
-  nanolink-network:
+  ziplink-network:
     driver: bridge
 
 # -------------------------

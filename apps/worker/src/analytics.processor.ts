@@ -64,7 +64,7 @@ export class AnalyticsProcessor extends WorkerHost {
    * Uses SHA-256 with a salt to anonymize the IP
    */
   private hashIpAddress(ip: string): string {
-    const salt = process.env.IP_HASH_SALT || 'nanolink-default-salt';
+    const salt = process.env.IP_HASH_SALT || 'ziplink-default-salt';
     return createHash('sha256').update(`${ip}${salt}`).digest('hex').substring(0, 64);
   }
 

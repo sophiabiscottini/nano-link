@@ -37,7 +37,7 @@ async function bootstrap() {
 
   // Configure Swagger/OpenAPI documentation ✨
   const config = new DocumentBuilder()
-    .setTitle('NanoLink API')
+    .setTitle('ZipLink API')
     .setDescription(
       'A cute but powerful URL shortening service ~ focused on scalability and data analytics! ♡\n\n' +
       '## Features\n' +
@@ -57,7 +57,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   await SwaggerModule.setup('docs', app, document, {
-    customSiteTitle: 'NanoLink API Docs ✨',
+    customSiteTitle: 'ZipLink API Docs ✨',
     customfavIcon: 'https://nestjs.com/img/logo-small.svg',
     customCss: `
       .swagger-ui .topbar { background-color: #ffb048ff; }
@@ -77,7 +77,7 @@ async function bootstrap() {
 
   await app.listen(port, '0.0.0.0');
 
-  logger.log(`🚀 NanoLink API is running on: http://localhost:${port}`);
+  logger.log(`🚀 ZipLink API is running on: http://localhost:${port}`);
   logger.log(`📚 Swagger docs available at: http://localhost:${port}/docs`);
   logger.log(`📦 Environment: ${nodeEnv}`);
   logger.log(`✨ Ready to shorten URLs ~`);
