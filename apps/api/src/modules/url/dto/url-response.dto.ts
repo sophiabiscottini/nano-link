@@ -15,7 +15,7 @@ export class UrlResponseDto {
 
   @ApiProperty({
     description: 'The original URL',
-    example: 'https://github.com/sophiabiscottini/nano-link',
+    example: 'https://github.com/sophiabiscottini/zip-link',
   })
   originalUrl: string;
 

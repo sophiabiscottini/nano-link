@@ -4,7 +4,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 export class CreateUrlDto {
   @ApiProperty({
     description: 'The original URL to be shortened',
-    example: 'https://github.com/sophiabiscottini/nano-link',
+    example: 'https://github.com/sophiabiscottini/zip-link',
   })
   @IsUrl({}, { message: 'Please provide a valid URL' })
   url: string;

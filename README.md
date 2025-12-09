@@ -82,7 +82,7 @@ ZipLink is designed to handle high traffic (solving the *Thundering Herd* proble
 ## 📁 Project Structure ♡₊˚ 🦢・
 
 ```
-nano-link/
+zip-link/
 ├── apps/
 │   ├── api/                   # NestJS API application
 │   │   ├── src/
@@ -111,8 +111,8 @@ nano-link/
 
 ```bash
 # Clone the repository
-git clone https://github.com/sophiabiscottini/nano-link.git
-cd nano-link
+git clone https://github.com/sophiabiscottini/zip-link.git
+cd zip-link
 
 # Install dependencies
 pnpm install

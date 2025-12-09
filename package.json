@@ -1,5 +1,5 @@
 {
-  "name": "nano-link",
+  "name": "zip-link",
   "version": "0.7.0",
   "description": "A high-performance URL shortening service focused on scalability and data analytics ✨",
   "author": "Sophia (Biscottini)",
@@ -7,12 +7,12 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sophiabiscottini/nano-link.git"
+    "url": "git+https://github.com/sophiabiscottini/zip-link.git"
   },
   "bugs": {
-    "url": "https://github.com/sophiabiscottini/nano-link/issues"
+    "url": "https://github.com/sophiabiscottini/zip-link/issues"
   },
-  "homepage": "https://github.com/sophiabiscottini/nano-link#readme",
+  "homepage": "https://github.com/sophiabiscottini/zip-link#readme",
   "engines": {
     "node": ">=20.0.0"
   },
